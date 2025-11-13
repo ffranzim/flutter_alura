@@ -22,7 +22,7 @@ class GoogleBook {
     thumbnailLink = extractThumbnailLink(map);
   }
 
-  String extractThumbnailLink(Map<String, dynamic> map) => map["volumeInfo"]["imageLinks"]?["thumbnail"] == null ? "https://placehold.co/200x290" : map["volumeInfo"]["imageLinks"]["thumbnail"];
+  String extractThumbnailLink(Map<String, dynamic> map) => map["volumeInfo"]["imageLinks"]?["thumbnail"] == null ? "https://placehold.co/200x290.png" : map["volumeInfo"]["imageLinks"]["thumbnail"];
 
   String extractAuthor(Map<String, dynamic> map) => map["volumeInfo"]["authors"] == null ? "" : (map["volumeInfo"]["authors"] as List<dynamic>).map((e) => e).toString();
 

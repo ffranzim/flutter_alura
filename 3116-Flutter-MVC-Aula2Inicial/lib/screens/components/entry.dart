@@ -3,7 +3,7 @@ import 'package:grimorio/models/google_book.dart';
 import 'package:grimorio/theme.dart';
 
 class Entry extends StatelessWidget {
-  const Entry({super.key, required this.googleBook});
+const Entry({super.key, required this.googleBook});
 
   final GoogleBook googleBook;
 

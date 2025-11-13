@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grimorio/models/personal_book.dart';
 
 import '../../theme.dart';
 import 'components/display_text.dart';
@@ -6,14 +7,18 @@ import 'components/primary_button.dart';
 import 'components/secondary_button.dart';
 
 class BookDetails extends StatefulWidget {
-  BookDetails({super.key,});
+  final PersonalBook personalBook;
+
+  const BookDetails({
+    super.key,
+    required this.personalBook,
+  });
 
   @override
   State<BookDetails> createState() => _BookDetailsState();
 }
 
 class _BookDetailsState extends State<BookDetails> {
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -34,7 +39,7 @@ class _BookDetailsState extends State<BookDetails> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 16.0),
                     child: Image.network(
-                      "Image Link",
+                     widget.personalBook.googleBook.thumbnailLink,
                       height: 220,
                       width: 144,
                       fit: BoxFit.cover,
@@ -43,7 +48,7 @@ class _BookDetailsState extends State<BookDetails> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8.0),
                     child: Text(
-                      "Book Title",
+                      widget.personalBook.googleBook.title,
                       style: ModalDecorationProperties.bookTitle,
                     ),
                   ),
@@ -52,7 +57,7 @@ class _BookDetailsState extends State<BookDetails> {
                     child: SizedBox(
                       width: double.maxFinite,
                       child: Text(
-                        "Book Authors",
+                        widget.personalBook.googleBook.authors,
                         style: ModalDecorationProperties.bookAuthor,
                       ),
                     ),
@@ -63,7 +68,7 @@ class _BookDetailsState extends State<BookDetails> {
                       children: [
                         Expanded(
                           child: Text(
-                            "Book Description",
+                            widget.personalBook.googleBook.description,
                             maxLines: 4,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -93,7 +98,7 @@ class _BookDetailsState extends State<BookDetails> {
                     padding: const EdgeInsets.only(bottom: 8.0),
                     child: Row(children: <Widget>[
                       Text(
-                        "Day started",
+                        widget.personalBook.dayStarted,
                         style: const TextStyle(
                             fontSize: 16, fontWeight: FontWeight.w600),
                       )
@@ -111,7 +116,7 @@ class _BookDetailsState extends State<BookDetails> {
                           ),
                         ),
                         Text(
-                          "Day Started",
+                          "Fim da Leitura",
                           style: TextStyle(color: AppColors.mediumPink),
                         ),
                       ],
@@ -121,7 +126,7 @@ class _BookDetailsState extends State<BookDetails> {
                     padding: const EdgeInsets.only(bottom: 16.0),
                     child: Row(children: <Widget>[
                       Text(
-                        "Day Finished",
+                        widget.personalBook.dayFinished,
                         style: const TextStyle(
                             fontSize: 16, fontWeight: FontWeight.w600),
                       )
@@ -142,7 +147,7 @@ class _BookDetailsState extends State<BookDetails> {
                     padding: const EdgeInsets.only(bottom: 32.0),
                     child: Row(
                       children: [
-                        Expanded(child: Text("Book Comments")),
+                        Expanded(child: Text(widget.personalBook.comments)),
                       ],
                     ),
                   ),
