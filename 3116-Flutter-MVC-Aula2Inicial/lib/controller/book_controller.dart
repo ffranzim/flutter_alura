@@ -4,11 +4,10 @@ import 'package:grimorio/models/personal_book.dart';
 import '../models/google_book.dart';
 
 class BookController {
+  final _personalBookDatabase = PersonalBookDatabase();
 
-  PersonalBookDatabase _personalBookDatabase = PersonalBookDatabase();
-
-  void addBook(GoogleBook googleBook, String dayStarted, String dayFinished, String comments) {
-
+  void addBook(GoogleBook googleBook, String dayStarted, String dayFinished,
+      String comments) {
     PersonalBook newPersonalBook = PersonalBook(
       googleBook: googleBook,
       dayStarted: dayStarted,
@@ -17,10 +16,17 @@ class BookController {
     );
 
     _personalBookDatabase.save(newPersonalBook);
-    
   }
 
   Future<List<PersonalBook>> getPersonalBooks() {
     return _personalBookDatabase.findAll();
+  }
+
+  void updateBook(PersonalBook personalBook) {
+    _personalBookDatabase.save(personalBook);
+  }
+
+  void deleteBook(PersonalBook personalBook) {
+    _personalBookDatabase.delete(personalBook);
   }
 }

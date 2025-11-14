@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:grimorio/controller/book_controller.dart';
 import 'package:grimorio/models/personal_book.dart';
 
 import '../../theme.dart';
 import 'components/display_text.dart';
 import 'components/primary_button.dart';
 import 'components/secondary_button.dart';
+import 'edit_details.dart';
+import 'home.dart';
 
 class BookDetails extends StatefulWidget {
-  final PersonalBook personalBook;
+  PersonalBook personalBook;
 
-  const BookDetails({
+  BookDetails({
     super.key,
     required this.personalBook,
   });
@@ -19,6 +22,11 @@ class BookDetails extends StatefulWidget {
 }
 
 class _BookDetailsState extends State<BookDetails> {
+
+    final bookController =  BookController();
+
+
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -157,18 +165,18 @@ class _BookDetailsState extends State<BookDetails> {
                       icon: Icons.edit,
                       text: "Editar",
                       onTap: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => EditDetails(
-                        //               book: "book",
-                        //             ))).then((value) {
-                        //   setState(() {
-                        //     if (value != null) {
-                        //       "Update book";
-                        //     }
-                        //   });
-                        // });
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EditDetails(
+                                      personalBook: widget.personalBook,
+                                    ))).then((value) {
+                          setState(() {
+                            if (value != null) {
+                              widget.personalBook = value;
+                            }
+                          });
+                        });
                       },
                     ),
                   ),
@@ -179,11 +187,13 @@ class _BookDetailsState extends State<BookDetails> {
                       text: "Excluir",
                       onTap: () {
                         // Delete book
-                        // Navigator.pushAndRemoveUntil(
-                        //   context,
-                        //   MaterialPageRoute(builder: (context) => const Home()),
-                        //   (_) => false,
-                        // );
+                        bookController.deleteBook(widget.personalBook);
+
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(builder: (context) => const Home()),
+                          (_) => false,
+                        );
                       },
                     ),
                   ),
